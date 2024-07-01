@@ -36,6 +36,5 @@ subprojects {
             exceptionFormat = TestExceptionFormat.FULL
         }
         useJUnitPlatform()
-        maxHeapSize = "1g"
     }
 }
