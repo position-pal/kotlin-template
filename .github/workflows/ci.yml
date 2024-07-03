@@ -47,7 +47,7 @@ jobs:
       - name: Check
         run: ./gradlew check
 
-  mergify-check:
+  success:
     needs: build
     if: always()
     runs-on: ubuntu-latest
