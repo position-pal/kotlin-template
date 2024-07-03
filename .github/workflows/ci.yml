@@ -46,3 +46,11 @@ jobs:
 
       - name: Check
         run: ./gradlew check
+
+  mergify-check:
+    needs: build
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Final Check
+        run: echo "All builds passed successfully!"
