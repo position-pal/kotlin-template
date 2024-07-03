@@ -61,7 +61,7 @@ jobs:
 
   deploy:
     needs:
-      - build
+      - success
     uses: ./.github/workflows/publish.yml
     if: github.ref_name == 'master' || github.ref_name == 'main'
     secrets: inherit
