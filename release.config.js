@@ -1,3 +1,5 @@
+const config = require('semantic-release-preconfigured-conventional-commits')
+
 const publishCommands = `
 git tag -a -f \${nextRelease.version} \${nextRelease.version} -F CHANGELOG.md || exit 2
 git push --force origin \${nextRelease.version} || exit 3
