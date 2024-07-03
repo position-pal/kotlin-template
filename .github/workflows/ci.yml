@@ -58,3 +58,10 @@ jobs:
     steps:
       - name: Final Check
         run: echo "All builds passed successfully!"
+
+  deploy:
+    needs:
+      - test
+    uses: ./.github/workflows/publish.yml
+    if: github.ref_name == 'master' || github.ref_name == 'main'
+    secrets: inherit
