@@ -9,8 +9,6 @@ jobs:
       packages: write
     concurrency:
       group: release-and-delivery-${{ github.event.number || github.ref }}
-    needs:
-      - build
     runs-on: ubuntu-latest
     outputs:
       release-status: ${{ env.release_status }}
