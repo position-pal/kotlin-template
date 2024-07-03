@@ -2,7 +2,8 @@ name: build-and-test
 
 on:
   push:
-    tags: '*'
+    tags:
+      - '*'
     branches-ignore: # Pushes on these branches won't start a build
       - 'autodelivery**'
       - 'bump-**'
@@ -11,6 +12,9 @@ on:
       - 'README.md'
       - 'CHANGELOG.md'
       - 'LICENSE'
+      - '.gitignore'
+      - '.mergify.yml'
+      - 'renovate.json'
   pull_request:
 
 jobs:
@@ -46,6 +50,44 @@ jobs:
 
       - name: Check
         run: ./gradlew check
+
+  release-and-delivery:
+    permissions:
+      packages: write
+    concurrency:
+      group: release-and-delivery-${{ github.event.number || github.ref }}
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    outputs:
+      release-status: ${{ env.release_status }}
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+          token: ${{ secrets.RELEASE_TOKEN }}
+
+      - name: Get All Tags
+        run: git fetch --tags -f
+
+      - name: Find the version of Node from package.json
+        id: node-version
+        run: echo "version=$(jq -r .engines.node package.json)" >> $GITHUB_OUTPUT
+
+      - name: Install Node
+        uses: actions/setup-node@v4.0.2
+        with:
+          node-version: ${{ steps.node-version.outputs.version }}
+
+      - name: Release
+        run: |
+          npm install
+          npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
   success:
     needs: build
