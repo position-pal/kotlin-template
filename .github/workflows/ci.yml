@@ -35,10 +35,6 @@ jobs:
           distribution: 'temurin'
           java-version: ${{ matrix.jvm-version }}
 
-      - name: Grant execute permission for gradlew on Unix systems
-        if: matrix.os != 'windows'
-        run: chmod +x gradlew
-
       - name: Assemble
         run: ./gradlew assemble
 
