@@ -4,8 +4,8 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.qa)
-    alias(libs.plugins.kotlin.sv)
     alias(libs.plugins.kotlin.dokka)
+    alias(libs.plugins.git.semantic.versioning)
 }
 
 allprojects {
@@ -29,6 +29,12 @@ subprojects {
             implementation(kotlin.stdlib)
             implementation(kotlin.stdlib.jdk8)
             testImplementation(bundles.kotlin.testing)
+        }
+    }
+
+    kotlin {
+        compilerOptions {
+            allWarningsAsErrors = true
         }
     }
 
