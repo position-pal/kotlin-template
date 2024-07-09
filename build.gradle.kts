@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.qa)
     alias(libs.plugins.kotlin.sv)
+    alias(libs.plugins.kotlin.dokka)
 }
 
 allprojects {
@@ -20,6 +21,7 @@ subprojects {
     with(rootProject.libs.plugins) {
         apply(plugin = kotlin.jvm.get().pluginId)
         apply(plugin = kotlin.qa.get().pluginId)
+        apply(plugin = kotlin.dokka.get().pluginId)
     }
 
     with(rootProject.libs) {
