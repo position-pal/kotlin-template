@@ -1,4 +1,4 @@
-name: build-and-test
+name: Build, Test and Check
 
 on:
   push:
@@ -24,40 +24,45 @@ jobs:
         os: [windows, macos, ubuntu]
         jvm-version: [ 11, 17, 21 ]
     runs-on: ${{ matrix.os }}-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
-
       - name: Set up JDK ${{ matrix.jvm-version }}
         uses: actions/setup-java@99b8673ff64fbf99d8d325f52d9a5bdedb8483e9 # v4
         with:
           distribution: 'temurin'
           java-version: ${{ matrix.jvm-version }}
-
-      - name: Assemble
-        run: ./gradlew assemble
-
-      - name: Build
-        run: ./gradlew build
-
+      - name: Assemble main and test classes
+        run: ./gradlew classes testClasses
       - name: Test
         run: ./gradlew test
-
       - name: Check
         run: ./gradlew check
 
   success:
-    needs: build
-    if: always()
+    needs:
+      - build
+    if: >- # run if any needed job failed or if no needed job was cancelled
+      always() && (
+        contains(join(needs.*.result, ','), 'failure')
+        || !contains(join(needs.*.result, ','), 'cancelled')
+      )
     runs-on: ubuntu-latest
     steps:
-      - name: Final Check
-        run: echo "All builds passed successfully!"
+      - name: Verify no failures occurred in needed jobs
+        # if there are failures, false is executed and the job fails.
+        run: ${{ !contains(join(needs.*.result, ','), 'failure') }}
 
   deploy:
     needs:
       - success
     uses: ./.github/workflows/publish.yml
+    if: github.ref_name == 'master' || github.ref_name == 'main'
+    secrets: inherit
+
+  publish-api-doc:
+    needs:
+      - success
+    uses: ./.github/workflows/dokka-gh-pages.yml
     if: github.ref_name == 'master' || github.ref_name == 'main'
     secrets: inherit
