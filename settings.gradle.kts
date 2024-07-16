@@ -1,10 +1,21 @@
+plugins {
+    id("org.danilopianini.gradle-pre-commit-git-hooks") version "2.0.7"
+    id("com.gradle.develocity") version "3.17.5"
+}
+
 rootProject.name = "Kotlin Template for Jvm"
+
 include(
     "core",
 )
 
-plugins {
-    id("org.danilopianini.gradle-pre-commit-git-hooks") version "2.0.7"
+develocity {
+    buildScan {
+        termsOfUseUrl = "https://gradle.com/terms-of-service"
+        termsOfUseAgree = "yes"
+        uploadInBackground = !System.getenv("CI").toBoolean()
+        publishing.onlyIf { it.buildResult.failures.isNotEmpty() }
+    }
 }
 
 gitHooks {
