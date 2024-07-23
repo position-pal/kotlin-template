@@ -18,12 +18,23 @@ on:
   pull_request:
 
 jobs:
+  dispatcher:
+    runs-on: ubuntu-22.04
+    if: >- # Prevents running the workflow twice on PR made by a branch of the same repository
+      github.event_name != 'pull_request'
+      || github.event.pull_request.head.repo.full_name != github.repository
+    steps:
+      - run: 'true'
+
   build:
+    needs:
+      - dispatcher
     strategy:
       matrix:
-        os: [windows, macos, ubuntu]
+        os: [ubuntu-22.04, macos-14, windows-2022]
         jvm-version: [ 11, 17, 21 ]
-    runs-on: ${{ matrix.os }}-latest
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
@@ -47,7 +58,7 @@ jobs:
         contains(join(needs.*.result, ','), 'failure')
         || !contains(join(needs.*.result, ','), 'cancelled')
       )
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Verify no failures occurred in needed jobs
         # if there are failures, false is executed and the job fails.
