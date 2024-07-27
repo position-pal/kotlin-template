@@ -2,13 +2,7 @@ name: Build, Test and Check
 
 on:
   push:
-    tags:
-      - '*'
-    branches-ignore: # Pushes on these branches won't start a build
-      - 'autodelivery**'
-      - 'bump-**'
-      - 'renovate/**'
-    paths-ignore: # Pushes that change only these file won't start the workflow
+    paths-ignore:
       - 'README.md'
       - 'CHANGELOG.md'
       - 'LICENSE'
@@ -16,6 +10,7 @@ on:
       - '.mergify.yml'
       - 'renovate.json'
   pull_request:
+  workflow_dispatch:
 
 jobs:
   dispatcher:
@@ -53,10 +48,13 @@ jobs:
   success:
     needs:
       - build
-    if: >- # run if any needed job failed or if no needed job was cancelled
+    if: >- # run if at least one needed job has failed or all needed jobs have not been cancelled or skipped
       always() && (
         contains(join(needs.*.result, ','), 'failure')
-        || !contains(join(needs.*.result, ','), 'cancelled')
+        || (
+          !contains(join(needs.*.result, ','), 'cancelled') 
+          && !contains(join(needs.*.result, ','), 'skipped')
+        )
       )
     runs-on: ubuntu-22.04
     steps:
