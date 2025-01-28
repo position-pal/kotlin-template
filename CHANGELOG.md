@@ -1,3 +1,27 @@
+## [1.0.2](https://github.com/position-pal/kotlin-template/compare/1.0.1...1.0.2) (2025-01-28)
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v2.1.10 ([#115](https://github.com/position-pal/kotlin-template/issues/115)) ([d331b3e](https://github.com/position-pal/kotlin-template/commit/d331b3e64d28593a852beff37599bfd3adfe579a))
+* **deps:** update dependency gradle to v8.12 ([#107](https://github.com/position-pal/kotlin-template/issues/107)) ([cfb3d35](https://github.com/position-pal/kotlin-template/commit/cfb3d353da7efc1103b2dfdb4b3f9da022895d31))
+* **deps:** update dependency gradle to v8.12.1 ([#113](https://github.com/position-pal/kotlin-template/issues/113)) ([014dec1](https://github.com/position-pal/kotlin-template/commit/014dec1cfbce4afa4aee08a6bbb2c51a2a74551c))
+* **deps:** update dependency org.mockito:mockito-core to v5.15.2 ([#109](https://github.com/position-pal/kotlin-template/issues/109)) ([b2f6b7b](https://github.com/position-pal/kotlin-template/commit/b2f6b7b80e9bd0e44b71c00763a5c470ea7d9e76))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.116 ([#101](https://github.com/position-pal/kotlin-template/issues/101)) ([173a50a](https://github.com/position-pal/kotlin-template/commit/173a50ab8da0a6c20c1472b76d6fa784e91caa45))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.117 ([#108](https://github.com/position-pal/kotlin-template/issues/108)) ([55600f4](https://github.com/position-pal/kotlin-template/commit/55600f46f76e657417a8fbc512487c962efe07d3))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.118 ([#111](https://github.com/position-pal/kotlin-template/issues/111)) ([623c4ad](https://github.com/position-pal/kotlin-template/commit/623c4adbd525d3d2cf25d155df36e383c89eb757))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.119 ([#112](https://github.com/position-pal/kotlin-template/issues/112)) ([9263137](https://github.com/position-pal/kotlin-template/commit/9263137545d69c3cd515e47b30673a6eda6703f6))
+* **deps:** update node.js to 22.12 ([#99](https://github.com/position-pal/kotlin-template/issues/99)) ([d4cff60](https://github.com/position-pal/kotlin-template/commit/d4cff606765a174ddb3c30c1fce1a24aca541b13))
+* **deps:** update node.js to 22.13 ([#110](https://github.com/position-pal/kotlin-template/issues/110)) ([ad42f82](https://github.com/position-pal/kotlin-template/commit/ad42f823d94c8df3b3e675f6d0444ae44dbcc9e7))
+* **deps:** update plugin com.gradle.develocity to v3.19 ([#104](https://github.com/position-pal/kotlin-template/issues/104)) ([820ecd1](https://github.com/position-pal/kotlin-template/commit/820ecd16d236b822cf01dda9562ff62943b00ec3))
+* **deps:** update plugin kotlin-dokka to v2 ([#106](https://github.com/position-pal/kotlin-template/issues/106)) ([b2033de](https://github.com/position-pal/kotlin-template/commit/b2033de485ab17d33a02e55c005241efe3a1a227))
+* **deps:** update plugin kotlin-qa to v0.75.0 ([#96](https://github.com/position-pal/kotlin-template/issues/96)) ([fff2d3b](https://github.com/position-pal/kotlin-template/commit/fff2d3b8192868c72a2ede69eea86e74006fb805))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.18 ([#103](https://github.com/position-pal/kotlin-template/issues/103)) ([ed7f1e5](https://github.com/position-pal/kotlin-template/commit/ed7f1e5115e99b203144a0ce0e8ac64d581648c6))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-java digest to 7a6d8a8 ([#105](https://github.com/position-pal/kotlin-template/issues/105)) ([b6eced4](https://github.com/position-pal/kotlin-template/commit/b6eced415ccacdb8eb55bba44cd8921b002e39dc))
+* **deps:** update actions/setup-node action to v4.2.0 ([#114](https://github.com/position-pal/kotlin-template/issues/114)) ([ef8934a](https://github.com/position-pal/kotlin-template/commit/ef8934af6480ffc079790db67c4d4c0549cae923))
+
 ## [1.0.1](https://github.com/position-pal/kotlin-template/compare/1.0.0...1.0.1) (2024-11-28)
 
 ### Dependency updates
