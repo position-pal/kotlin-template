@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.qa)
     alias(libs.plugins.kotlin.dokka)
     alias(libs.plugins.git.semantic.versioning)
+    alias(libs.plugins.shadowJar)
 }
 
 allprojects {
@@ -22,6 +23,7 @@ subprojects {
         apply(plugin = kotlin.jvm.get().pluginId)
         apply(plugin = kotlin.qa.get().pluginId)
         apply(plugin = kotlin.dokka.get().pluginId)
+        apply(plugin = shadowJar.get().pluginId)
     }
 
     with(rootProject.libs) {
@@ -45,4 +47,9 @@ subprojects {
         }
         useJUnitPlatform()
     }
+}
+
+// Set the project version based on the git history.
+gitSemVer {
+    assignGitSemanticVersion()
 }

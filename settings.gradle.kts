@@ -6,7 +6,7 @@ plugins {
 rootProject.name = "kotlin-template"
 
 include(
-    "core",
+    "entrypoint",
 )
 
 develocity {
