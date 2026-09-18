@@ -37,7 +37,7 @@ jobs:
   dry-delivery:
     needs: build
     if: false # uncomment this line to enable the job
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -65,7 +65,7 @@ jobs:
       pull-requests: write
     concurrency:
       group: release-and-delivery-${{ github.event.number || github.ref }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     outputs: # see release.config.js
       release-status: ${{ env.RELEASE_STATUS }}
       release_version: ${{ env.RELEASE_VERSION }}
@@ -96,7 +96,7 @@ jobs:
     # Trigger this job only if the semantic release bot has released a new version
     # if: ${{ needs.release.outputs.release-status == 'released' }}
     if: false # uncomment this and the above line to enable the condition
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       packages: write
@@ -133,7 +133,7 @@ jobs:
       - release
     # Trigger this job only if the semantic release bot has released a new version
     if: ${{ needs.release.outputs.release-status == 'released' }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -159,7 +159,7 @@ jobs:
         contains(join(needs.*.result, ','), 'failure')
         || !contains(join(needs.*.result, ','), 'cancelled')
       )
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - name: Verify no failures occurred in needed jobs
         # if there are failures, false is executed and the job fails.
